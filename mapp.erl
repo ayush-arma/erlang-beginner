@@ -1,5 +1,7 @@
 -module(mapp).
 -export([freqCount/1]).
+-export([grpOddEven/1]).
+-export([flipMapp/1]).
 -export([merge/2]).
 
 
@@ -33,4 +35,40 @@ merge(Map1,Map2,[K|LISTT])->
 
 
 %mapp:merge(    #{a => 2, b => 3},    #{a => 5, c => 1}).
+
+
+grpOddEven(List)->
+    grpOddEven(List,#{}).
+grpOddEven([],Map)->
+    Map;
+grpOddEven([K|List],Map)->
+    if
+        K rem 2 == 0 ->
+            Arr=maps:get(even, Map, []),
+            Arr2=[K|Arr],
+            Map2=Map#{even=>Arr2},
+            grpOddEven(List,Map2);
+        true->
+            Arr=maps:get(odd, Map, []),
+            Arr2=[K|Arr],
+            Map2=Map#{odd=>Arr2},
+            grpOddEven(List,Map2)
+        end.
+
+
+flipMapp(Map1)->
+    Keys=maps:keys(Map1),
+    flipMapp(Map1,#{},Keys).
+flipMapp(_Map,Map2,[])->
+    Map2;
+flipMapp(Map,Map2,[K|Keys])->
+    Val=maps:get(K,Map),
+    NewMap2=Map2#{Val=>K},
+    flipMapp(Map,NewMap2,Keys).
+
+%mapp:flipMapp(#{    alice => 90,    bob => 72,    carol => 85}).
+
+
+
+
 
