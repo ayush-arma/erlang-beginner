@@ -1,7 +1,7 @@
 -module(counter_server).
 -behaviour(gen_server). %% Tells the compiler this module implements gen_server callbacks
 
--export([start_link/0, increment/0, get_value/0]).
+-export([start_link/0, increment/0, get_value/0,get_name/0]).
 
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3]).
 
@@ -32,8 +32,11 @@ handle_cast(_Msg, State) ->
 handle_info(_Info, State) ->
     {noreply, State}.
 
-terminate(_Reason, _State) ->
+terminate(_, _) ->
     ok.
 
 code_change(_OldVsn, State, _Extra) ->
     {ok, State}.
+
+get_name()->
+    io:format("Error in module: ~p~n", [?MODULE]).
