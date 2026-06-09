@@ -7,9 +7,6 @@
     cancel_event/1
 ]).
 
-%%% =========================
-%%% Public API
-%%% =========================
 
 start_server() ->
     register(event_server,
@@ -26,9 +23,7 @@ add_event(Name, DelaySeconds) ->
 cancel_event(Name) ->
     event_server ! {cancel_event, Name}.
 
-%%% =========================
-%%% Event Process
-%%% =========================
+
 
 event_process(Server, Name, Delay) ->
     receive
