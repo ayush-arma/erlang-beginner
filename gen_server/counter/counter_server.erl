@@ -3,8 +3,7 @@
 
 -export([start_link/0, increment/0, reset/0,get_value/0, get_history/0,increment/1]).
 
--export([init/1, handle_call/3, handle_cast/2
-]).
+-export([init/1, handle_call/3, handle_cast/2]).
 
 start_link()->
     gen_server:start_link({local, ?MODULE}, ?MODULE, [], []).
